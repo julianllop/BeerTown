@@ -35,7 +35,7 @@ const SearchBar = ({ search, setSearch, currentBeerType }) => {
     };
 
     return (
-        <div className="flex flex-row items-center justify-between shadow-lg rounded-full h-10 w-[30%] ">
+        <div className="flex flex-row items-center justify-between shadow-lg rounded-full h-10 w-[70%] ">
             <input
                 onChange={handleInputChange}
                 onKeyDown={handleKeyPress}

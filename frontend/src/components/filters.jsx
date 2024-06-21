@@ -8,7 +8,7 @@ import { setPage } from "../redux/pageSlice";
 import { useNavigate, useParams } from "react-router-dom";
 import { setOrder } from "../redux/orderSlice";
 
-export default function Filters({ search }) {
+export default function Filters({ search, onClose }) {
     const params = useParams();
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -28,6 +28,7 @@ export default function Filters({ search }) {
     }, [currentBeerType, dispatch, navigate]);
 
     const handleFilter = async (typeOfBeer) => {
+        onClose();
         setSelectedFilter(typeOfBeer);
         await dispatch(setPage(1));
         await dispatch(setType(typeOfBeer));
@@ -45,8 +46,7 @@ export default function Filters({ search }) {
     };
 
     return (
-        <div className="flex flex-col gap-2 w-[210px]">
-            <h3 className="text-lg">Type of beer: </h3>
+        <div className="flex flex-col gap-2 w-full bg-lime-50">
             <div className="flex flex-col gap-2 shadow-md rounded-md">
                 <FilterInput
                     value="ale"
@@ -76,4 +76,5 @@ export default function Filters({ search }) {
 
 Filters.propTypes = {
     search: PropTypes.string,
+    onClose: PropTypes.func,
 };

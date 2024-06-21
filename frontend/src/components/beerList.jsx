@@ -35,7 +35,7 @@ export default function BeerList({ currentOrder }) {
     }
 
     return (
-        <div className="grid grid-cols-auto w-[80vw] gap-8">
+        <div className="grid grid-cols-auto justify-items-center items-center justify-between w-full gap-8">
             {fetchedBeers?.beers?.map((beer) => (
                 <Beer
                     key={beer.id}

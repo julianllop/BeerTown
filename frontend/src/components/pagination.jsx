@@ -2,6 +2,8 @@ import PropTypes from "prop-types";
 import { setPage } from "../redux/pageSlice";
 import { useDispatch } from "react-redux";
 import { fetchBeers } from "../redux/beerSlice";
+import { IoIosArrowForward } from "react-icons/io";
+import { IoIosArrowBack } from "react-icons/io";
 
 export default function Pagination({
     search,
@@ -11,8 +13,6 @@ export default function Pagination({
     currentOrder,
 }) {
     const dispatch = useDispatch();
-
-    console.log(search);
 
     const totalPages = Math.ceil(totalBeers / 10);
 
@@ -103,28 +103,32 @@ export default function Pagination({
     };
 
     const selectedButtonStyle =
-        "flex items-center justify-center h-8 w-8 rounded rounded-3xl border border-green-700 bg-green-700 text-lime-100 focus:outline-none shadow-md";
+        "flex items-center justify-center h-7 w-7 sm:h-8 sm:w-8 p-2 sm:p-4 rounded rounded-[100%]  border-green-700 bg-green-700 text-lime-100 focus:outline-none shadow-md  text-[12px] sm:text-lg";
     const unselectedButtonStyle =
-        "flex items-center justify-center h-8 w-8 rounded rounded-3xl border border-green-700 text-green-700 focus:outline-none shadow-md";
+        "flex items-center justify-center h-7 w-7 sm:h-8 sm:w-8 p-2 rounded rounded-[100%] border border-green-700 text-green-700 focus:outline-none shadow-md  text-[12px] sm:text-lg";
+    const arrowButtonStyle =
+        "flex items-center justify-center h-7 w-7 sm:h-8 sm:w-8 rounded rounded-[100%] border border-green-700 text-green-700 focus:outline-none shadow-md  text-[12px] sm:text-lg";
 
     return (
-        <div className="w-auto h-10 flex items-center justify-center p-4 gap-2">
-            <button
-                onClick={handlerFirst}
-                className="flex items-center justify-center h-8 w-8 px-6 rounded-2xl border border-green-700 text-green-700 focus:outline-none shadow-md"
-            >
-                {"<<<"}
-            </button>
-            <button
-                onClick={handleGoBack}
-                className="flex items-center justify-center h-8 w-8 rounded-3xl border border-green-700 text-green-700 focus:outline-none shadow-md"
-            >
-                {"<"}
+        <div className="w-[90vw] h-10 flex items-center justify-center mb-5 gap-2 sm:gap-4 text-[12px] sm:text-lg">
+            <button onClick={handleGoBack} className={arrowButtonStyle}>
+                <IoIosArrowBack />
             </button>
             {currentPage >= 4 && (
                 <button
+                    onClick={handlerFirst}
+                    className={unselectedButtonStyle}
+                >
+                    <h1 className="flex items-center justify-center w-[28px] h-[28px]">
+                        1
+                    </h1>
+                </button>
+            )}
+
+            {currentPage >= 4 && (
+                <button
                     disabled={true}
-                    className="w-10 h-10 flex items-center justify-center text-green-700 focus:outline-none"
+                    className="h-7 w-7 flex items-center justify-center text-green-700 focus:outline-none"
                 >
                     ...
                 </button>
@@ -140,29 +144,28 @@ export default function Pagination({
                                 : unselectedButtonStyle
                         }
                     >
-                        {number}
+                        <h1 className="flex items-center justify-center w-[28px] h-[28px]">
+                            {number}
+                        </h1>
                     </button>
                 );
             })}
-            {currentPage < 10 && (
+            {currentPage < totalPages - 2 && (
                 <button
                     disabled={"true"}
-                    className="w-10 h-10 flex items-center justify-center text-green-700 focus:outline-none"
+                    className="h-7 w-7 flex items-center justify-center text-green-700 focus:outline-none"
                 >
                     ...
                 </button>
             )}
-            <button
-                onClick={handleForward}
-                className="flex items-center justify-center h-8 w-8 rounded-3xl border border-green-700 text-green-700 focus:outline-none shadow-md"
-            >
-                {">"}
-            </button>
-            <button
-                onClick={handlerLast}
-                className="flex items-center justify-center h-8 w-8 px-6 rounded-2xl border border-green-700 text-green-700 focus:outline-none shadow-md"
-            >
-                {">>>"}
+            {currentPage < totalPages - 2 && (
+                <button onClick={handlerLast} className={unselectedButtonStyle}>
+                    {totalPages}
+                </button>
+            )}
+
+            <button onClick={handleForward} className={arrowButtonStyle}>
+                <IoIosArrowForward />
             </button>
         </div>
     );

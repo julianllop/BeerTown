@@ -6,11 +6,12 @@ import { setOrder } from "../redux/orderSlice";
 import { useNavigate } from "react-router-dom";
 import { setType } from "../redux/beerTypeSlice";
 
-const ClearAll = ({ setSearch }) => {
+const ClearAll = ({ setSearch, onClose }) => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
     const handleClick = async () => {
+        onClose();
         await dispatch(setPage(1));
         await dispatch(setType("ale"));
         await dispatch(setOrder(""));
@@ -41,4 +42,5 @@ export default ClearAll;
 
 ClearAll.propTypes = {
     setSearch: PropTypes.func,
+    onClose: PropTypes.func,
 };
