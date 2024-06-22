@@ -10,7 +10,7 @@ const server = express();
 
 server.use(
     cors({
-        origin: ["https://julian-llop-porfolio.onrender.com"],
+        origin: ["https://beertown.onrender.com"],
         credentials: true,
     })
 );
