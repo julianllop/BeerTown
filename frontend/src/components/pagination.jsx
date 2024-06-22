@@ -110,7 +110,7 @@ export default function Pagination({
         "flex items-center justify-center h-7 w-7 sm:h-8 sm:w-8 rounded rounded-[100%] border border-green-700 text-green-700 focus:outline-none shadow-md  text-[12px] sm:text-lg";
 
     return (
-        <div className="w-[90vw] h-10 flex items-center justify-center mb-5 gap-2 sm:gap-4 text-[12px] sm:text-lg">
+        <div className="w-[90vw] h-10 flex items-center justify-center gap-2 sm:gap-4 text-[12px] sm:text-lg">
             <button onClick={handleGoBack} className={arrowButtonStyle}>
                 <IoIosArrowBack />
             </button>
