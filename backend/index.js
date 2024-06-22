@@ -10,7 +10,10 @@ const server = express();
 
 server.use(
     cors({
-        origin: ["http://127.0.0.1:5173"],
+        origin: [
+            "http://127.0.0.1:5173",
+            "https://beer-town-server.onrender.com",
+        ],
         credentials: true,
     })
 );
