@@ -1,24 +1,26 @@
 import PropTypes from "prop-types";
 import { FaStar } from "react-icons/fa";
-// import { useNavigate } from "react-router-dom";
+import { CiBeerMugFull } from "react-icons/ci";
+import { useState } from "react";
 
-export default function Beer({ price, name, rating, image, id }) {
+export default function Beer({ price, name, rating, image }) {
     // const navigate = useNavigate();
-
-    const handleClick = () => {
-        // navigate(`http://localhost:3001/beer/${beerType}/${id}`);
-    };
+    const [imgError, setImgError] = useState(false);
 
     return (
-        <div
-            onClick={handleClick}
-            className="w-[250px] h-[350px] shadow-md rounded-md flex flex-col justify-between items-start cursor-pointer hover:shadow-lg"
-        >
-            <img
-                src={image}
-                alt={name}
-                className="w-[150px] h-[200px] self-center "
-            />
+        <div className="w-[250px] h-[350px] shadow-md rounded-md flex flex-col justify-between items-start cursor-pointer hover:shadow-lg">
+            <div className="w-full flex flex-col justify-between items-center bg-paper rounded-t-md shadow-md p-4">
+                {imgError ? (
+                    <CiBeerMugFull className="w-[150px] h-[200px] self-center text-lime-900/30 " />
+                ) : (
+                    <img
+                        src={image}
+                        alt={name}
+                        className="w-[150px] h-[200px] self-center"
+                        onError={() => setImgError(true)}
+                    />
+                )}
+            </div>
             <div className="p-4">
                 <h2 className="text-lg font-bold text-green-700">{price}</h2>
                 <h2 className="text-sm">{name}</h2>

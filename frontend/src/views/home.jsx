@@ -1,5 +1,6 @@
+import { lazy, Suspense, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import BeerList from "../components/beerList";
+const BeerList = lazy(() => import("../components/beerList"));
 import Filters from "../components/filters";
 import Orders from "../components/orders";
 import Pagination from "../components/pagination";
@@ -8,16 +9,20 @@ import { setPage } from "../redux/pageSlice";
 import { setOrder } from "../redux/orderSlice";
 import SearchBar from "../components/searchBar";
 import ClearAll from "../components/clearAll";
-import { useState } from "react";
 import { LuFilter } from "react-icons/lu";
 import Modal from "../components/modal";
+import SkeletonList from "../components/skeletonList";
+import Error from "../components/error";
+// import SkeletonList from "../components/skeletonList";
 
 export default function Home() {
     const dispatch = useDispatch();
     const [search, setSearch] = useState("");
     const [isOpen, setIsOpen] = useState(false);
 
+    const beerStatus = useSelector((state) => state.beers.status);
     const fetchedBeers = useSelector((state) => state.beers.beers);
+    const error = useSelector((state) => state.beers.error);
     const totalBeers = useSelector((state) => state.beers.beers.totalBeers);
     const currentPage = parseInt(
         window.localStorage.getItem("currentPage") || 1
@@ -32,6 +37,8 @@ export default function Home() {
     const currentBeerType = params.beerType;
 
     const onClose = () => setIsOpen(false);
+
+    console.log(error);
 
     return (
         <div className="w-full px-10 py-5 gap-10 flex flex-col items-center justify-between ">
@@ -62,7 +69,16 @@ export default function Home() {
             <div className="w-full flex flex-col items-center">
                 <div className="flex flex-row gap-8 w-[100vw]"></div>
                 <div className="flex flex-col items-center justify-center gap-10 w-[80vw]">
-                    <BeerList currentOrder={currentOrder} />
+                    {beerStatus === "loading" ? (
+                        <SkeletonList />
+                    ) : beerStatus === "failed" ? (
+                        <Error error={error} />
+                    ) : (
+                        <Suspense fallback={<SkeletonList />}>
+                            <BeerList currentOrder={currentOrder} />
+                        </Suspense>
+                    )}
+
                     <Pagination
                         search={search}
                         currentOrder={currentOrder}

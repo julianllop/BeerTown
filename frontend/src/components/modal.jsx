@@ -11,13 +11,13 @@ const Modal = ({ isOpen, onClose, children }) => {
         >
             <div
                 onClick={(event) => event.stopPropagation()}
-                className={`bg-white h-[40vh] shadow ${
+                className={`bg-paper h-[40vh] shadow ${
                     isOpen ? "scale-100 opacity-100" : "scale-125 opacity-0"
-                } w-[80%] sm:w-[40%] py-4  px-8 flex flex-col items-center justify-around rounded-lg`}
+                } w-[80%] sm:w-[40%] py-4  px-8 md:px-14 flex flex-col items-center justify-around rounded-lg`}
             >
                 <button
                     onClick={onClose}
-                    className="absolute top-2 right-2 p-1 rounded-3xl text-gray-400 bg-white hover:bg-gray-50 hover:text-gray-600 hover:shadow-sm text-2xl"
+                    className="flex justify-center items-center absolute top-1 right-1 md:top-2 md:right-2 p-1 rounded-3xl text-gray-600 bg-paper hover:bg-paper hover:text-gray-900 shadow-lg hover:shadow-xl text-2xl md:text-3xl"
                 >
                     <IoIosClose />
                 </button>

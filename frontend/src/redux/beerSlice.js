@@ -9,15 +9,22 @@ const initialState = {
 
 export const fetchBeers = createAsyncThunk(
     "beers/fetchBeers",
-    async ({ beerType, page, order, name }) => {
-        console.log(name);
-        const response = await axios.get(
-            `http://localhost:3001/beer/${beerType}`,
-            {
-                params: { page: page, order: order, name: name },
+    async ({ beerType, page, order, name }, { rejectWithValue }) => {
+        try {
+            const response = await axios.get(
+                `http://localhost:3001/beer/${beerType}`,
+                {
+                    params: { page, order, name },
+                }
+            );
+            return response.data;
+        } catch (error) {
+            if (error.response && error.response.data) {
+                return rejectWithValue(error.response.data);
+            } else {
+                return rejectWithValue({ message: error.message });
             }
-        );
-        return response.data;
+        }
     }
 );
 
@@ -40,7 +47,9 @@ export const beerSlice = createSlice({
             })
             .addCase(fetchBeers.rejected, (state, action) => {
                 state.status = "failed";
-                state.error = action.error.message;
+                state.error = action.payload
+                    ? action.payload.message
+                    : action.error.message;
             });
     },
 });

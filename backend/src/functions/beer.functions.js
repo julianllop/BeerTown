@@ -3,9 +3,10 @@ const axios = require("axios");
 const getBeersFromApi = async (typeOfBeer, page = 1, order, name) => {
     const limit = 10;
 
-    const beers = await axios.get(
+    const response = await axios.get(
         `https://api.sampleapis.com/beers/${typeOfBeer}`
     );
+    const beers = response.data;
 
     if (order && orders[order]) {
         orders[order](beers.data);
@@ -20,8 +21,6 @@ const getBeersFromApi = async (typeOfBeer, page = 1, order, name) => {
         const end = start + limit;
         const paginatedBeers = byName.slice(start, end);
 
-        // console.log(paginatedBeers);
-
         return (
             byName.length && {
                 beers: paginatedBeers,
@@ -31,11 +30,11 @@ const getBeersFromApi = async (typeOfBeer, page = 1, order, name) => {
     } else {
         const start = (page - 1) * limit;
         const end = start + limit;
-        const paginatedBeers = beers.data.slice(start, end);
+        const paginatedBeers = beers.slice(start, end);
 
         return {
             beers: paginatedBeers,
-            totalBeers: beers.data.length,
+            totalBeers: beers.length,
         };
     }
 };

@@ -6,6 +6,7 @@ export default withMT({
         extend: {
             colors: {
                 "ts-lime": "#cbcfa373",
+                paper: "rgb(254, 255, 248)",
             },
             gridTemplateColumns: {
                 auto: "repeat(auto-fill, minmax(250px, 1fr))",
@@ -16,6 +17,12 @@ export default withMT({
         },
         fontFamily: {
             lato: ["Lato", "sans-serif"],
+        },
+        fontSize: {
+            "2xl": "1.5rem",
+            "3xl": "2rem",
+            "4xl": "3rem",
+            "5xl": "5rem",
         },
     },
     plugins: [],

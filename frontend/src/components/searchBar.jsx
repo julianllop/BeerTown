@@ -35,18 +35,18 @@ const SearchBar = ({ search, setSearch, currentBeerType }) => {
     };
 
     return (
-        <div className="flex flex-row items-center justify-between shadow-lg rounded-full h-10 w-[70%] ">
+        <div className="flex flex-row items-center justify-between shadow-lg rounded-full h-10 w-[70%] bg-paper">
             <input
                 onChange={handleInputChange}
                 onKeyDown={handleKeyPress}
                 value={input}
                 placeholder="Search..."
-                className="h-10 focus:outline-none bg-transparent px-6 w-[90%]"
+                className="h-10 focus:outline-none bg-transparent px-6 w-[90%] text-green-700"
             />
             <button
                 onClick={handleSubmit}
                 onKeyDown={handleKeyPress}
-                className="hover:bg-ts-lime h-10 w-10 flex flex-row items-center justify-center rounded-r-full border-l border-ts-lime"
+                className="hover:bg-lime-50 h-10 w-10 flex flex-row items-center justify-center rounded-r-full border-l border-ts-lime text-xl text-green-700"
             >
                 <IoIosSearch />
             </button>

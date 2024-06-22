@@ -26,10 +26,6 @@ export default function BeerList({ currentOrder }) {
         }
     }, [beerStatus, dispatch, currentPage, currentBeerType, currentOrder]);
 
-    if (beerStatus === "loading") {
-        return <div>Loading...</div>;
-    }
-
     if (beerStatus === "failed") {
         return <div>Error: {error}</div>;
     }
