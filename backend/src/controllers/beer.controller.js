@@ -5,9 +5,9 @@ const getBeers = async (req, res) => {
         const { beerType } = req.params;
         const { page, order, name } = req.query;
 
-        console.log(order);
-        console.log(page);
-        // console.log(name);
+        // console.log("order: ", order);
+        // console.log("page: ", page);
+        // console.log("name: ", name);
 
         const beers = await getBeersFromApi(beerType, page, order, name);
 

@@ -33,6 +33,7 @@ export default function Filters({ search, onClose }) {
         await dispatch(setPage(1));
         await dispatch(setType(typeOfBeer));
         await dispatch(setOrder(""));
+        navigate(`/beers/${typeOfBeer}`);
         await dispatch(
             fetchBeers({
                 page: currentPage,
@@ -41,7 +42,6 @@ export default function Filters({ search, onClose }) {
                 name: search,
             })
         );
-        navigate(`/beers/${typeOfBeer}`);
         await dispatch(setStatus());
     };
 

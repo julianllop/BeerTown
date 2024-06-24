@@ -3,30 +3,36 @@ const axios = require("axios");
 const getBeersFromApi = async (typeOfBeer, page = 1, order, name) => {
     const limit = 10;
 
+    console.log("order: ", order);
+    console.log("page: ", page);
+    console.log("name: ", name);
+
     const response = await axios.get(
         `https://api.sampleapis.com/beers/${typeOfBeer}`
     );
     const beers = response.data;
 
     if (order && orders[order]) {
-        orders[order](beers.data);
+        await orders[order](beers);
     }
 
     if (name) {
-        const byName = beers.data.filter((beer) =>
+        const byName = beers.filter((beer) =>
             beer.name.toLowerCase().includes(name.toLocaleLowerCase())
         );
+
+        const totalBeers = byName.length;
 
         const start = (page - 1) * limit;
         const end = start + limit;
         const paginatedBeers = byName.slice(start, end);
 
-        return (
-            byName.length && {
-                beers: paginatedBeers,
-                totalBeers: byName.length,
-            }
-        );
+        console.log("byName:", paginatedBeers);
+
+        return {
+            beers: paginatedBeers,
+            totalBeers: totalBeers,
+        };
     } else {
         const start = (page - 1) * limit;
         const end = start + limit;

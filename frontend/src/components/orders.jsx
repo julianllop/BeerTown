@@ -3,7 +3,7 @@ import { useState } from "react";
 import { IoIosArrowDown } from "react-icons/io";
 import { IoIosArrowUp } from "react-icons/io";
 import { useDispatch } from "react-redux";
-import { fetchBeers } from "../redux/beerSlice";
+import { fetchBeers, setStatus } from "../redux/beerSlice";
 import { setPage } from "../redux/pageSlice";
 import { setOrder } from "../redux/orderSlice";
 
@@ -20,10 +20,10 @@ export default function Orders({
     const handleOption = async (option) => {
         if (currentOrder !== option.order) {
             onClose();
-            setSelectedOption(option.name);
             setIsOpen(false);
-            await dispatch(setOrder(option.order));
+            setSelectedOption(option.name);
             await dispatch(setPage(1));
+            await dispatch(setOrder(option.order));
             await dispatch(
                 fetchBeers({
                     page: 1,
@@ -32,6 +32,7 @@ export default function Orders({
                     name: search,
                 })
             );
+            // await dispatch(setStatus());
         }
     };
 

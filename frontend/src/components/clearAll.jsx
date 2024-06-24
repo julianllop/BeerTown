@@ -16,6 +16,7 @@ const ClearAll = ({ setSearch, onClose }) => {
         await dispatch(setType("ale"));
         await dispatch(setOrder(""));
         setSearch("");
+        navigate(`/beers/ale`);
         await dispatch(
             fetchBeers({
                 page: 1,
@@ -24,7 +25,6 @@ const ClearAll = ({ setSearch, onClose }) => {
                 name: "",
             })
         );
-        navigate(`/beers/ale`);
         await dispatch(setStatus());
     };
 

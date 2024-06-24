@@ -1,4 +1,4 @@
-import { lazy, Suspense, useState } from "react";
+import { lazy, Suspense, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 const BeerList = lazy(() => import("../components/beerList"));
 import Filters from "../components/filters";
@@ -13,35 +13,34 @@ import { LuFilter } from "react-icons/lu";
 import Modal from "../components/modal";
 import SkeletonList from "../components/skeletonList";
 import Error from "../components/error";
+import { setType } from "../redux/beerTypeSlice";
 // import SkeletonList from "../components/skeletonList";
 
 export default function Home() {
+    const params = useParams();
     const dispatch = useDispatch();
     const [search, setSearch] = useState("");
     const [isOpen, setIsOpen] = useState(false);
 
     const beerStatus = useSelector((state) => state.beers.status);
-    const fetchedBeers = useSelector((state) => state.beers.beers);
-    const error = useSelector((state) => state.beers.error);
-    const totalBeers = useSelector((state) => state.beers.beers.totalBeers);
+    const fetchedBeers = useSelector((state) => state.beers.allBeers);
+    const totalBeers = useSelector((state) => state.beers.totalBeers);
     const currentPage = parseInt(
         window.localStorage.getItem("currentPage") || 1
     );
     const currentOrder = window.localStorage.getItem("currentOrder") || "";
+    const currentBeerType = params.beerType;
 
     dispatch(setPage(currentPage));
     dispatch(setOrder(currentOrder));
-
-    const params = useParams();
-
-    const currentBeerType = params.beerType;
+    dispatch(setType(currentBeerType));
+    // useEffect(() => {
+    // }, [dispatch, currentPage, currentOrder, currentBeerType]);
 
     const onClose = () => setIsOpen(false);
 
-    console.log(error);
-
     return (
-        <div className="w-full px-10 py-5 gap-10 flex flex-col items-center justify-between ">
+        <div className="w-full px-10 py-5 gap-8 flex flex-col items-center justify-between ">
             <div className="flex flex-row w-[100vw] sm:w-[80vw] sm:justify-between sm:px-5 items-center justify-center gap-10 ">
                 <div
                     onClick={() => setIsOpen(true)}
@@ -67,17 +66,16 @@ export default function Home() {
                 />
             </div>
             <div className="w-full flex flex-col items-center">
-                <div className="flex flex-row gap-8 w-[100vw]"></div>
                 <div className="flex flex-col items-center justify-center gap-10 w-[80vw]">
                     {beerStatus === "loading" ? (
                         <SkeletonList />
-                    ) : beerStatus === "failed" ? (
-                        <Error error={error} />
                     ) : (
                         <Suspense fallback={<SkeletonList />}>
                             <BeerList currentOrder={currentOrder} />
                         </Suspense>
                     )}
+
+                    {beerStatus === "failed" && <Error />}
 
                     <Pagination
                         search={search}

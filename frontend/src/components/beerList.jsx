@@ -7,9 +7,8 @@ import Beer from "./beer";
 export default function BeerList({ currentOrder }) {
     const dispatch = useDispatch();
 
-    const fetchedBeers = useSelector((state) => state.beers.beers);
+    const fetchedBeers = useSelector((state) => state.beers.allBeers);
     const beerStatus = useSelector((state) => state.beers.status);
-    const error = useSelector((state) => state.beers.error);
     const currentPage =
         parseInt(window.localStorage.getItem("currentPage")) || 1;
     const currentBeerType =
@@ -26,13 +25,9 @@ export default function BeerList({ currentOrder }) {
         }
     }, [beerStatus, dispatch, currentPage, currentBeerType, currentOrder]);
 
-    if (beerStatus === "failed") {
-        return <div>Error: {error}</div>;
-    }
-
     return (
         <div className="grid grid-cols-auto justify-items-center items-center justify-between w-full gap-8">
-            {fetchedBeers?.beers?.map((beer) => (
+            {fetchedBeers?.map((beer) => (
                 <Beer
                     key={beer.id}
                     price={beer.price}

@@ -2,30 +2,24 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
 const initialState = {
-    beers: [],
+    allBeers: [],
+    totalBeers: 0,
     status: "idle",
     error: null,
 };
 
 export const fetchBeers = createAsyncThunk(
     "beers/fetchBeers",
-    async ({ beerType, page, order, name }, { rejectWithValue }) => {
-        try {
-            const response = await axios.get(
-                // `http://localhost:3001/beer/${beerType}`,
-                `https://beer-town-server.onrender.com/beer/${beerType}`,
-                {
-                    params: { page, order, name },
-                }
-            );
-            return response.data;
-        } catch (error) {
-            if (error.response && error.response.data) {
-                return rejectWithValue(error.response.data);
-            } else {
-                return rejectWithValue({ message: error.message });
+    async ({ beerType, page, order, name }) => {
+        const response = await axios.get(
+            `http://localhost:3001/beer/${beerType}`,
+            // `https://beer-town-server.onrender.com/beer/${beerType}`,
+            {
+                params: { page, order, name },
             }
-        }
+        );
+
+        return response.data;
     }
 );
 
@@ -44,13 +38,14 @@ export const beerSlice = createSlice({
             })
             .addCase(fetchBeers.fulfilled, (state, action) => {
                 state.status = "succeeded";
-                state.beers = action.payload;
+                state.allBeers = action.payload.beers;
+                state.totalBeers = action.payload.totalBeers;
             })
             .addCase(fetchBeers.rejected, (state, action) => {
                 state.status = "failed";
-                state.error = action.payload
-                    ? action.payload.message
-                    : action.error.message;
+                state.error = action.error.message;
+                state.totalBeers = 0;
+                state.allBeers = [];
             });
     },
 });
