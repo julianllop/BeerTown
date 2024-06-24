@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import { setPage } from "../redux/pageSlice";
 import { useDispatch } from "react-redux";
-import { fetchBeers, setStatus } from "../redux/beerSlice";
+import { fetchBeers } from "../redux/beerSlice";
 import { IoIosArrowForward } from "react-icons/io";
 import { IoIosArrowBack } from "react-icons/io";
 

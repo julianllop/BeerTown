@@ -1,4 +1,4 @@
-import { lazy, Suspense, useEffect, useState } from "react";
+import { lazy, Suspense, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 const BeerList = lazy(() => import("../components/beerList"));
 import Filters from "../components/filters";
@@ -23,7 +23,6 @@ export default function Home() {
     const [isOpen, setIsOpen] = useState(false);
 
     const beerStatus = useSelector((state) => state.beers.status);
-    const fetchedBeers = useSelector((state) => state.beers.allBeers);
     const totalBeers = useSelector((state) => state.beers.totalBeers);
     const currentPage = parseInt(
         window.localStorage.getItem("currentPage") || 1
