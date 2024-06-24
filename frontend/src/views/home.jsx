@@ -82,7 +82,7 @@ export default function Home() {
                         currentOrder={currentOrder}
                         currentPage={currentPage}
                         currentBeerType={currentBeerType}
-                        totalBeers={fetchedBeers ? totalBeers : 0}
+                        totalBeers={totalBeers ? totalBeers : 0}
                     />
                 </div>
             </div>

@@ -45,7 +45,7 @@ export default function Pagination({
                     name: search,
                 })
             );
-            await dispatch(setStatus());
+            // await dispatch(setStatus());
         }
     };
 
@@ -60,7 +60,7 @@ export default function Pagination({
                     name: search,
                 })
             );
-            await dispatch(setStatus());
+            // await dispatch(setStatus());
         }
     };
 
@@ -75,7 +75,7 @@ export default function Pagination({
                     name: search,
                 })
             );
-            await dispatch(setStatus());
+            // await dispatch(setStatus());
         }
     };
 
@@ -90,7 +90,7 @@ export default function Pagination({
                     name: search,
                 })
             );
-            await dispatch(setStatus());
+            // await dispatch(setStatus());
         }
     };
 
@@ -104,7 +104,7 @@ export default function Pagination({
                 name: search,
             })
         );
-        await dispatch(setStatus());
+        // await dispatch(setStatus());
     };
 
     const selectedButtonStyle =
@@ -155,7 +155,7 @@ export default function Pagination({
                     </button>
                 );
             })}
-            {currentPage < totalPages - 2 && (
+            {currentPage < totalPages - 2 && totalPages < 5 && (
                 <button
                     disabled={"true"}
                     className="h-7 w-7 flex items-center justify-center text-green-700 focus:outline-none"
@@ -163,7 +163,7 @@ export default function Pagination({
                     ...
                 </button>
             )}
-            {currentPage < totalPages - 2 && (
+            {currentPage < totalPages - 2 && totalPages < 5 && (
                 <button onClick={handlerLast} className={unselectedButtonStyle}>
                     {totalPages}
                 </button>
