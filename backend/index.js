@@ -10,7 +10,10 @@ const server = express();
 
 server.use(
     cors({
-        origin: ["https://beertown.onrender.com", "http://localhost:5173"],
+        origin: [
+            "https://beertown.onrender.com",
+            "http://localhost:5173, https://beer-town-backend.vercel.app",
+        ],
         credentials: true,
     })
 );

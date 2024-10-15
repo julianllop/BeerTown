@@ -4,7 +4,6 @@ import { CiBeerMugFull } from "react-icons/ci";
 import { useState } from "react";
 
 export default function Beer({ price, name, rating, image }) {
-    // const navigate = useNavigate();
     const [imgError, setImgError] = useState(false);
 
     return (
