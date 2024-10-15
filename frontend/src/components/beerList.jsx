@@ -25,6 +25,8 @@ export default function BeerList({ currentOrder }) {
         }
     }, [beerStatus, dispatch, currentPage, currentBeerType, currentOrder]);
 
+    console.log(fetchBeers);
+
     return (
         <div className="grid grid-cols-auto justify-items-center items-center justify-between w-full gap-8">
             {fetchedBeers?.map((beer) => (
