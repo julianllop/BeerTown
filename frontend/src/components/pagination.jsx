@@ -157,7 +157,7 @@ export default function Pagination({
             })}
             {currentPage < totalPages - 2 && totalPages < 5 && (
                 <button
-                    disabled={"true"}
+                    disabled={true}
                     className="h-7 w-7 flex items-center justify-center text-green-700 focus:outline-none"
                 >
                     ...
