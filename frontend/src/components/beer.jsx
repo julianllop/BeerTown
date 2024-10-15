@@ -36,7 +36,7 @@ export default function Beer({ price, name, rating, image }) {
 Beer.propTypes = {
     price: PropTypes.string,
     name: PropTypes.string,
-    rating: PropTypes.string,
+    rating: PropTypes.number,
     image: PropTypes.string,
     id: PropTypes.number,
 };

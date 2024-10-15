@@ -53,6 +53,7 @@ export default function Filters({ search, onClose }) {
                     name="ale"
                     label="ale"
                     checked={selectedFilter === "ale"}
+                    onChange={() => {}}
                     onClick={() => handleFilter("ale")}
                 />
                 <FilterInput
@@ -60,6 +61,7 @@ export default function Filters({ search, onClose }) {
                     name="redAle"
                     label="red ale"
                     checked={selectedFilter === "red-ale"}
+                    onChange={() => {}}
                     onClick={() => handleFilter("red-ale")}
                 />
                 <FilterInput
@@ -67,6 +69,7 @@ export default function Filters({ search, onClose }) {
                     name="stout"
                     label="stout"
                     checked={selectedFilter === "stouts"}
+                    onChange={() => {}}
                     onClick={() => handleFilter("stouts")}
                 />
             </div>

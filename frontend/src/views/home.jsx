@@ -1,4 +1,4 @@
-import { lazy, Suspense, useState } from "react";
+import { lazy, Suspense, useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 const BeerList = lazy(() => import("../components/beerList"));
 import Filters from "../components/filters";
@@ -14,7 +14,6 @@ import Modal from "../components/modal";
 import SkeletonList from "../components/skeletonList";
 import Error from "../components/error";
 import { setType } from "../redux/beerTypeSlice";
-// import SkeletonList from "../components/skeletonList";
 
 export default function Home() {
     const params = useParams();
@@ -30,11 +29,12 @@ export default function Home() {
     const currentOrder = window.localStorage.getItem("currentOrder") || "";
     const currentBeerType = params.beerType;
 
-    dispatch(setPage(currentPage));
-    dispatch(setOrder(currentOrder));
-    dispatch(setType(currentBeerType));
-    // useEffect(() => {
-    // }, [dispatch, currentPage, currentOrder, currentBeerType]);
+    // Mover dispatch dentro de useEffect
+    useEffect(() => {
+        dispatch(setPage(currentPage));
+        dispatch(setOrder(currentOrder));
+        dispatch(setType(currentBeerType));
+    }, [dispatch, currentPage, currentOrder, currentBeerType]);
 
     const onClose = () => setIsOpen(false);
 

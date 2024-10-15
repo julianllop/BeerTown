@@ -12,8 +12,8 @@ export const fetchBeers = createAsyncThunk(
     "beers/fetchBeers",
     async ({ beerType, page, order, name }) => {
         const response = await axios.get(
-            // `http://localhost:3001/beer/${beerType}`,
-            `https://beer-town-server.onrender.com/beer/${beerType}`,
+            `http://localhost:3001/beer/${beerType}`,
+            // `https://beer-town-server.onrender.com/beer/${beerType}`,
             {
                 params: { page, order, name },
             }

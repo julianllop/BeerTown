@@ -32,5 +32,5 @@ export default Modal;
 Modal.propTypes = {
     isOpen: PropTypes.bool,
     onClose: PropTypes.func,
-    children: PropTypes.children,
+    children: PropTypes.array,
 };

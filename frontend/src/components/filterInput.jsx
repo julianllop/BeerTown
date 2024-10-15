@@ -16,6 +16,7 @@ export default function FilterInput({ value, name, checked, label, onClick }) {
                 value={value}
                 name={name}
                 checked={checked}
+                onChange={() => {}}
                 onClick={onClick}
             />
             <Label name={name} label={label}></Label>
