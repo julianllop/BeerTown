@@ -45,7 +45,7 @@ export default function Pagination({
                     name: search,
                 })
             );
-            // await dispatch(setStatus());
+            window.scrollTo(0, 0);
         }
     };
 
@@ -60,7 +60,7 @@ export default function Pagination({
                     name: search,
                 })
             );
-            // await dispatch(setStatus());
+            window.scrollTo(0, 0);
         }
     };
 
@@ -75,7 +75,7 @@ export default function Pagination({
                     name: search,
                 })
             );
-            // await dispatch(setStatus());
+            window.scrollTo(0, 0);
         }
     };
 
@@ -90,7 +90,7 @@ export default function Pagination({
                     name: search,
                 })
             );
-            // await dispatch(setStatus());
+            window.scrollTo(0, 0);
         }
     };
 
@@ -104,7 +104,7 @@ export default function Pagination({
                 name: search,
             })
         );
-        // await dispatch(setStatus());
+        window.scrollTo(0, 0);
     };
 
     const selectedButtonStyle =
@@ -130,7 +130,7 @@ export default function Pagination({
                 </button>
             )}
 
-            {currentPage >= 4 && (
+            {currentPage >= 5 && (
                 <button
                     disabled={true}
                     className="h-7 w-7 flex items-center justify-center text-green-700 focus:outline-none"
@@ -155,7 +155,7 @@ export default function Pagination({
                     </button>
                 );
             })}
-            {currentPage < totalPages - 2 && totalPages < 5 && (
+            {currentPage < totalPages - 2 && (
                 <button
                     disabled={true}
                     className="h-7 w-7 flex items-center justify-center text-green-700 focus:outline-none"
@@ -163,7 +163,7 @@ export default function Pagination({
                     ...
                 </button>
             )}
-            {currentPage < totalPages - 2 && totalPages < 5 && (
+            {currentPage < totalPages - 2 && (
                 <button onClick={handlerLast} className={unselectedButtonStyle}>
                     {totalPages}
                 </button>
