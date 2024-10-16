@@ -14,6 +14,7 @@ server.use(
             "https://beertown.onrender.com",
             "http://localhost:5173",
             "https://beer-town-backend.vercel.app",
+            "https://beer-town.vercel.app/beers/ale",
         ],
         credentials: true,
     })
